@@ -18,16 +18,38 @@
     
     //spawns a random obstacle
     [self addObstacle];
+    
+    //we want to add new obstacles at regular intervals.
+    //lets use "update loop" or "run loop" to perform regularly scheduled activities
+    //by default, Cocos2D runs "update loop" 60 times per second
+    //we can check things like player health, whether enemies have died, or whether our
+    //character is jumping too high
+    timeSinceObstacle = 0.0f;
 }
 
 -(void)update:(CCTime)delta
 {
-    // put update code here
+    //this will be run every frame.
+    //delta is the time that has elapsed since the last time it was run
+    //this is usually 1/60, but can be bigger if the game slows down
+    
+    
+    //increment the time since the last obstacle was added
+    timeSinceObstacle += delta; //delta is approximately 1/60th of a second
+    
+    //check to see if two seconds have passed
+    if(timeSinceObstacle > 2.0f) {
+        //add a new obstacle
+        [self addObstacle];
+        
+        //reset the timer
+        timeSinceObstacle = 0.0f;
+    }
 }
 
 // put new methods here
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    //this will get called every time the player touchers the screen\
+    //this will get called every time the player touchers the screen
     [character flap];
 }
 

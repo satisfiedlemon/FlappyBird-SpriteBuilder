@@ -15,6 +15,9 @@
     
     //add your character as a child of physicsNode so that physics will be applied to it.
     [physicsNode addChild:character];
+    
+    //spawns a random obstacle
+    [self addObstacle];
 }
 
 -(void)update:(CCTime)delta
